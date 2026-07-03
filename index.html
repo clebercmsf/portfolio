@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cleber Cabral — Gerente de TI &amp; Desenvolvedor</title>
+<meta name="description" content="Portfólio de Cleber Cabral: Gerente de TI e desenvolvedor front-end, projetos em JavaScript, TypeScript e React.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%230F1420%22/><circle cx=%2250%22 cy=%2250%22 r=%2210%22 fill=%22%23E3A857%22/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0F1420;
+    --panel:#141B2C;
+    --panel-2:#111726;
+    --border:#262F45;
+    --border-soft:#1D2438;
+    --text:#E8ECF4;
+    --muted:#8892A8;
+    --muted-2:#5C657C;
+    --amber:#E3A857;
+    --amber-dim:#8a6a3c;
+    --teal:#5FC7B8;
+    --js:#E3C157;
+    --ts:#5A93E0;
+    --css:#B583E0;
+    --radius:10px;
+    --mono:'JetBrains Mono', ui-monospace, monospace;
+    --sans:'Inter', system-ui, sans-serif;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(227,168,87,0.07), transparent),
+      radial-gradient(ellipse 700px 500px at 100% 10%, rgba(95,199,184,0.06), transparent),
+      var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+
+  a{color:inherit;}
+  :focus-visible{outline:2px solid var(--amber); outline-offset:3px; border-radius:4px;}
+
+  .wrap{max-width:920px; margin:0 auto; padding:0 24px;}
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(15,20,32,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border-soft);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 24px; max-width:920px; margin:0 auto;
+  }
+  .brand{
+    font-family:var(--mono); font-weight:600; font-size:14px;
+    display:flex; align-items:center; gap:8px; text-decoration:none;
+  }
+  .brand .dot{width:8px; height:8px; border-radius:50%; background:var(--amber); box-shadow:0 0 8px rgba(227,168,87,0.7);}
+  nav.links{display:flex; gap:28px; font-family:var(--mono); font-size:13px;}
+  nav.links a{text-decoration:none; color:var(--muted); transition:color .15s;}
+  nav.links a:hover{color:var(--text);}
+  .nav-toggle{display:none;}
+
+  /* ---------- HERO / TERMINAL ---------- */
+  .hero{padding:72px 0 48px;}
+  .terminal{
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    overflow:hidden;
+    box-shadow:0 30px 60px -30px rgba(0,0,0,0.6);
+  }
+  .terminal-bar{
+    display:flex; align-items:center; gap:8px;
+    padding:11px 16px;
+    background:var(--panel-2);
+    border-bottom:1px solid var(--border-soft);
+  }
+  .tb-dot{width:10px; height:10px; border-radius:50%;}
+  .tb-dot.r{background:#e0645c;} .tb-dot.y{background:#e3b757;} .tb-dot.g{background:#5cc27a;}
+  .tb-label{margin-left:8px; font-family:var(--mono); font-size:12px; color:var(--muted-2);}
+  .terminal-body{padding:28px 24px 30px; font-family:var(--mono); font-size:14px;}
+  .terminal-body .line{margin:0 0 6px; color:var(--muted);}
+  .terminal-body .prompt{color:var(--teal);}
+  .terminal-body .path{color:var(--amber);}
+  .out-name{
+    font-size:clamp(28px, 5vw, 44px);
+    font-family:var(--sans); font-weight:800;
+    color:var(--text); margin:14px 0 4px; letter-spacing:-0.01em;
+  }
+  .out-role{color:var(--muted); font-size:15px; margin-bottom:18px;}
+  .out-role strong{color:var(--text); font-weight:600;}
+  .status-row{
+    display:flex; align-items:center; gap:10px;
+    font-size:13px; color:var(--muted);
+    padding-top:14px; border-top:1px dashed var(--border-soft);
+  }
+  .pulse{
+    width:8px; height:8px; border-radius:50%; background:#5cc27a; position:relative; flex:none;
+  }
+  .pulse::after{
+    content:''; position:absolute; inset:-4px; border-radius:50%;
+    border:1px solid #5cc27a; animation:pulse 2s ease-out infinite;
+  }
+  @keyframes pulse{0%{transform:scale(0.6); opacity:1;} 100%{transform:scale(1.8); opacity:0;}}
+  .cursor{display:inline-block; width:8px; height:16px; background:var(--amber); vertical-align:-3px; animation:blink 1s step-start infinite;}
+  @keyframes blink{50%{opacity:0;}}
+
+  .hero-actions{display:flex; gap:12px; margin-top:24px; flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono); font-size:13px; text-decoration:none;
+    padding:11px 18px; border-radius:8px; border:1px solid var(--border);
+    display:inline-flex; align-items:center; gap:8px; transition:all .15s;
+  }
+  .btn-primary{background:var(--amber); color:#181205; border-color:var(--amber); font-weight:600;}
+  .btn-primary:hover{background:#f0b869;}
+  .btn-ghost{color:var(--text); background:transparent;}
+  .btn-ghost:hover{border-color:var(--teal); color:var(--teal);}
+
+  /* ---------- SECTION shell ---------- */
+  section{padding:64px 0;}
+  .eyebrow{
+    font-family:var(--mono); font-size:12px; color:var(--amber);
+    letter-spacing:0.08em; text-transform:uppercase;
+    display:flex; align-items:center; gap:10px; margin-bottom:14px;
+  }
+  .eyebrow::before{content:'//'; color:var(--muted-2);}
+  h2.sec-title{font-size:26px; font-weight:700; margin:0 0 28px; letter-spacing:-0.01em;}
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{display:grid; grid-template-columns:1.4fr 1fr; gap:40px; align-items:start;}
+  .about-text p{color:var(--muted); font-size:15.5px; margin:0 0 16px;}
+  .about-text strong{color:var(--text);}
+  .facts{
+    background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
+    padding:20px; font-family:var(--mono); font-size:13px;
+  }
+  .fact{display:flex; justify-content:space-between; padding:9px 0; border-bottom:1px solid var(--border-soft); gap:12px;}
+  .fact:last-child{border-bottom:none;}
+  .fact .k{color:var(--muted-2);}
+  .fact .v{color:var(--text); text-align:right;}
+  .fact a{color:var(--teal); text-decoration:none;}
+  .fact a:hover{text-decoration:underline;}
+
+  /* ---------- STACK / STATUS TABLE ---------- */
+  .status-board{
+    background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .status-head{
+    display:grid; grid-template-columns:1fr 110px;
+    padding:12px 20px; background:var(--panel-2);
+    font-family:var(--mono); font-size:11px; color:var(--muted-2);
+    text-transform:uppercase; letter-spacing:0.06em;
+    border-bottom:1px solid var(--border-soft);
+  }
+  .status-row-item{
+    display:grid; grid-template-columns:1fr 110px; align-items:center;
+    padding:14px 20px; border-bottom:1px solid var(--border-soft);
+    font-family:var(--mono); font-size:14px;
+  }
+  .status-row-item:last-child{border-bottom:none;}
+  .svc{display:flex; align-items:center; gap:12px;}
+  .svc-dot{width:8px; height:8px; border-radius:50%; flex:none;}
+  .svc-dot.on{background:#5cc27a; box-shadow:0 0 6px rgba(92,194,122,.6);}
+  .svc-dot.learn{background:var(--amber); box-shadow:0 0 6px rgba(227,168,87,.6);}
+  .pill{
+    justify-self:end; font-size:11px; padding:4px 10px; border-radius:20px;
+    border:1px solid var(--border); color:var(--muted);
+  }
+  .pill.on{color:#8fe0a6; border-color:#2d4a37; background:rgba(92,194,122,0.08);}
+  .pill.learn{color:var(--amber); border-color:var(--amber-dim); background:rgba(227,168,87,0.08);}
+
+  /* ---------- PROJECTS ---------- */
+  .projects-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  .card{
+    background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
+    padding:20px; display:flex; flex-direction:column; gap:12px;
+    transition:border-color .15s, transform .15s;
+  }
+  .card:hover{border-color:var(--teal); transform:translateY(-2px);}
+  .card-top{display:flex; align-items:center; justify-content:space-between; gap:10px;}
+  .repo-path{font-family:var(--mono); font-size:13px; color:var(--muted); word-break:break-all;}
+  .repo-path b{color:var(--text);}
+  .lang{display:flex; align-items:center; gap:6px; font-family:var(--mono); font-size:12px; color:var(--muted); flex:none;}
+  .lang-dot{width:9px; height:9px; border-radius:50%; flex:none;}
+  .lang-dot.js{background:var(--js);} .lang-dot.ts{background:var(--ts);} .lang-dot.css{background:var(--css);}
+  .card p{margin:0; font-size:14px; color:var(--muted); flex:1;}
+  .card-links{display:flex; gap:14px; font-family:var(--mono); font-size:12.5px; margin-top:4px;}
+  .card-links a{text-decoration:none; color:var(--teal); display:inline-flex; align-items:center; gap:6px;}
+  .card-links a:hover{text-decoration:underline;}
+  .card-links a.disabled{color:var(--muted-2); pointer-events:none;}
+
+  /* ---------- CONTACT ---------- */
+  .contact-panel{
+    background:var(--panel); border:1px solid var(--border); border-radius:var(--radius);
+    padding:30px;
+  }
+  .contact-top{font-family:var(--mono); font-size:13px; color:var(--muted); margin-bottom:20px;}
+  .contact-top .prompt{color:var(--teal);}
+  .cmd-list{display:flex; flex-direction:column; gap:10px;}
+  .cmd{
+    display:flex; align-items:center; justify-content:space-between;
+    background:var(--panel-2); border:1px solid var(--border-soft); border-radius:8px;
+    padding:13px 16px; text-decoration:none; color:var(--text);
+    font-family:var(--mono); font-size:13.5px; transition:border-color .15s;
+  }
+  .cmd:hover{border-color:var(--amber);}
+  .cmd .left{display:flex; gap:10px; align-items:center;}
+  .cmd .left .p{color:var(--amber);}
+  .cmd .arrow{color:var(--muted-2);}
+
+  footer{
+    border-top:1px solid var(--border-soft); padding:28px 0 40px;
+    font-family:var(--mono); font-size:12px; color:var(--muted-2);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+  }
+
+  @media (max-width:760px){
+    nav.links{display:none;}
+    .about-grid{grid-template-columns:1fr;}
+    .projects-grid{grid-template-columns:1fr;}
+    .status-head{display:none;}
+    .status-row-item{grid-template-columns:1fr auto;}
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="#top" class="brand"><span class="dot"></span>cleber@cabral</a>
+    <nav class="links">
+      <a href="#about">sobre</a>
+      <a href="#stack">stack</a>
+      <a href="#projects">projetos</a>
+      <a href="#contact">contato</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap" id="top">
+  <section class="hero">
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="tb-dot r"></span><span class="tb-dot y"></span><span class="tb-dot g"></span>
+        <span class="tb-label">cleber@rio-de-janeiro: ~</span>
+      </div>
+      <div class="terminal-body">
+        <p class="line"><span class="prompt">cleber@rio</span>:<span class="path">~</span>$ whoami</p>
+        <h1 class="out-name">Cleber Cabral</h1>
+        <p class="out-role"><strong>Gerente de TI</strong> &amp; desenvolvedor front-end — Rio de Janeiro, Brasil</p>
+        <p class="line"><span class="prompt">cleber@rio</span>:<span class="path">~</span>$ cat status.log<span class="cursor"></span></p>
+        <div class="status-row">
+          <span class="pulse"></span>
+          Disponível para novos projetos e oportunidades
+        </div>
+      </div>
+    </div>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#projects">Ver projetos</a>
+      <a class="btn btn-ghost" href="https://github.com/clebercmsf" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="btn btn-ghost" href="https://www.linkedin.com/in/clebercmsf/" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="eyebrow">about</div>
+    <h2 class="sec-title">Quem administra o sistema</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>Atuo como <strong>Gerente de TI</strong>, cuidando de infraestrutura, servidores e domínios no dia a dia — e do outro lado do teclado, desenvolvo interfaces e aplicações com <strong>JavaScript, TypeScript e React</strong>.</p>
+        <p>Sou <strong>graduado em Análise e Desenvolvimento de Sistemas</strong> e atualmente estudando <strong>Java</strong> para expandir para o back-end. Gosto de projetos que unem as duas pontas: a operação que mantém tudo no ar e o código que roda em cima dela.</p>
+        <p>Nas horas livres, entre um deploy e outro, gosto de explorar RPGs japoneses story-driven — o que também rendeu alguns projetos pessoais ligados ao idioma japonês.</p>
+      </div>
+      <div class="facts">
+        <div class="fact"><span class="k">função</span><span class="v">Gerente de TI</span></div>
+        <div class="fact"><span class="k">formação</span><span class="v">ADS</span></div>
+        <div class="fact"><span class="k">estudando</span><span class="v">Java</span></div>
+        <div class="fact"><span class="k">local</span><span class="v">Rio de Janeiro, BR</span></div>
+        <div class="fact"><span class="k">github</span><span class="v"><a href="https://github.com/clebercmsf" target="_blank" rel="noopener">@clebercmsf</a></span></div>
+        <div class="fact"><span class="k">linkedin</span><span class="v"><a href="https://www.linkedin.com/in/clebercmsf/" target="_blank" rel="noopener">in/clebercmsf</a></span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="stack">
+    <div class="eyebrow">stack</div>
+    <h2 class="sec-title">Status dos serviços</h2>
+    <div class="status-board">
+      <div class="status-head"><span>tecnologia</span><span>status</span></div>
+
+      <div class="status-row-item"><div class="svc"><span class="svc-dot on"></span>JavaScript</div><span class="pill on">online</span></div>
+      <div class="status-row-item"><div class="svc"><span class="svc-dot on"></span>TypeScript</div><span class="pill on">online</span></div>
+      <div class="status-row-item"><div class="svc"><span class="svc-dot on"></span>React</div><span class="pill on">online</span></div>
+      <div class="status-row-item"><div class="svc"><span class="svc-dot on"></span>Next.js</div><span class="pill on">online</span></div>
+      <div class="status-row-item"><div class="svc"><span class="svc-dot on"></span>Ionic</div><span class="pill on">online</span></div>
+      <div class="status-row-item"><div class="svc"><span class="svc-dot on"></span>Sass / CSS3</div><span class="pill on">online</span></div>
+      <div class="status-row-item"><div class="svc"><span class="svc-dot on"></span>Bootstrap</div><span class="pill on">online</span></div>
+      <div class="status-row-item"><div class="svc"><span class="svc-dot on"></span>HTML5</div><span class="pill on">online</span></div>
+      <div class="status-row-item"><div class="svc"><span class="svc-dot on"></span>Git</div><span class="pill on">online</span></div>
+      <div class="status-row-item"><div class="svc"><span class="svc-dot learn"></span>Java</div><span class="pill learn">estudando</span></div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="eyebrow">projects</div>
+    <h2 class="sec-title">Repositórios em destaque</h2>
+    <div class="projects-grid">
+
+      <div class="card">
+        <div class="card-top">
+          <span class="repo-path">clebercmsf/<b>react-stock</b></span>
+          <span class="lang"><span class="lang-dot ts"></span>TS</span>
+        </div>
+        <p>Aplicação em React para acompanhamento de cotações/ações, com deploy contínuo na Vercel.</p>
+        <div class="card-links">
+          <a href="https://react-stock-beryl.vercel.app" target="_blank" rel="noopener">demo ↗</a>
+          <a href="https://github.com/clebercmsf/react-stock" target="_blank" rel="noopener">código ↗</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <span class="repo-path">clebercmsf/<b>lordOfLegacy-transactions</b></span>
+          <span class="lang"><span class="lang-dot ts"></span>TS</span>
+        </div>
+        <p>Projeto de controle de transações, construído em TypeScript e publicado na Vercel.</p>
+        <div class="card-links">
+          <a href="https://lord-of-legacy-transactions.vercel.app" target="_blank" rel="noopener">demo ↗</a>
+          <a href="https://github.com/clebercmsf/lordOfLegacy-transactions" target="_blank" rel="noopener">código ↗</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <span class="repo-path">clebercmsf/<b>kanaQuiz</b></span>
+          <span class="lang"><span class="lang-dot ts"></span>TS</span>
+        </div>
+        <p>Quiz interativo para praticar hiragana e katakana — projeto pessoal ligado ao estudo de japonês.</p>
+        <div class="card-links">
+          <a href="https://github.com/clebercmsf/kanaQuiz" target="_blank" rel="noopener">código ↗</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <span class="repo-path">clebercmsf/<b>japaneseSpeaker-API</b></span>
+          <span class="lang"><span class="lang-dot ts"></span>TS</span>
+        </div>
+        <p>API em TypeScript voltada a recursos de fala/estudo do idioma japonês.</p>
+        <div class="card-links">
+          <a href="https://github.com/clebercmsf/japaneseSpeaker-API" target="_blank" rel="noopener">código ↗</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <span class="repo-path">clebercmsf/<b>Projeto-Telecall</b></span>
+          <span class="lang"><span class="lang-dot css"></span>CSS</span>
+        </div>
+        <p>Interface web construída com foco em estilização e camadas visuais em CSS.</p>
+        <div class="card-links">
+          <a href="https://clebercmsf.github.io/Projeto-Telecall/" target="_blank" rel="noopener">demo ↗</a>
+          <a href="https://github.com/clebercmsf/Projeto-Telecall" target="_blank" rel="noopener">código ↗</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-top">
+          <span class="repo-path">clebercmsf/<b>calculator-js</b></span>
+          <span class="lang"><span class="lang-dot js"></span>JS</span>
+        </div>
+        <p>Calculadora construída em JavaScript puro, publicada via GitHub Pages.</p>
+        <div class="card-links">
+          <a href="https://clebercmsf.github.io/calculator-js/" target="_blank" rel="noopener">demo ↗</a>
+          <a href="https://github.com/clebercmsf/calculator-js" target="_blank" rel="noopener">código ↗</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="eyebrow">contact</div>
+    <h2 class="sec-title">Conectar</h2>
+    <div class="contact-panel">
+      <p class="contact-top"><span class="prompt">cleber@rio</span>:<span class="path" style="color:var(--amber)">~</span>$ connect --list</p>
+      <div class="cmd-list">
+        <a class="cmd" href="mailto:cleber.cmsf@gmail.com">
+          <span class="left"><span class="p">$</span> email</span>
+          <span>cleber.cmsf@gmail.com <span class="arrow">→</span></span>
+        </a>
+        <a class="cmd" href="https://www.linkedin.com/in/clebercmsf/" target="_blank" rel="noopener">
+          <span class="left"><span class="p">$</span> linkedin</span>
+          <span>in/clebercmsf <span class="arrow">→</span></span>
+        </a>
+        <a class="cmd" href="https://github.com/clebercmsf" target="_blank" rel="noopener">
+          <span class="left"><span class="p">$</span> github</span>
+          <span>@clebercmsf <span class="arrow">→</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© <span id="year"></span> Cleber Cabral</span>
+    <span>construído com HTML, CSS &amp; JS · hospedado no GitHub Pages</span>
+  </footer>
+</div>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
